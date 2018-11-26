@@ -49,13 +49,9 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->price = $request->price;
         $product->discount = $request->discount;
-
         $product->save();
 
-        return response([
-            'data' => new ProductResource($product)
-
-        ],Response::HTTP_CREATED);
+        return response(['data' => new ProductResource($product)],Response::HTTP_CREATED);
     }
 
     /**
@@ -104,6 +100,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+         $product->delete();
+         return response(null,Response::HTTP_NO_CONTENT);
     }
 }
